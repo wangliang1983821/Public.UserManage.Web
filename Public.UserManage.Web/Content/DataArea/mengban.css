@@ -1,0 +1,63 @@
+/* CSS Document */
+/*-------7_1定义数据区-------*/
+.mengban{ background:#ccc; position:absolute;filter:alpha(opacity=70); opacity: 0.7; cursor:pointer;}
+.mengban_open{ cursor:pointer; position:absolute; background:#fff; border:1px solid #ccc; border-bottom:3px solid #ccc; float:left; color: #333; font-family: 宋体,Arial,Helvetica,sans-serif;font-size: 12px;line-height: 150%;}
+.mengban_open ul{ cursor:pointer; list-style: outside none none; margin:0; padding:0;}
+.mengban_open ul li{ cursor:pointer; width:95px; height:30px; line-height:30px; border-bottom:1px solid #ccc; padding:0 10px; list-style: outside none none;}
+.mengban_open ul li.current{ background:#ccc; color:#fff;}
+
+
+.div_fudong{ position:absolute; align-content:center; font-size:12px; margin:0; padding:0;z-index:100000; color:black;
+         
+
+}
+.div_fudongTree{ position:absolute; align-content:center; font-size:12px; margin:0; padding:0;z-index:100000; color:black; background:Green;
+         
+
+}
+ul.list li.DivCommonSelected 
+{
+      filter:alpha(opacity=50); opacity: 0.5;
+            background: blue;
+            background-color:blue;
+         
+          
+}
+.DivCommonSelected 
+{
+       filter:alpha(opacity=50); opacity: 0.5;
+            background: blue;
+            background-color:blue;
+       
+          
+             }
+.DivCommonSelected1 
+{
+             background :yellow;
+             filter:alpha(opacity=50); opacity: 0.5;
+}
+.DivCommonSelected2 
+{
+    filter:alpha(opacity=50); opacity: 0.5;
+     
+            background :green;
+            background-color:#BBFFEE;
+}
+.DivCommonSelected3 
+{
+     filter:alpha(opacity=50); opacity: 0.5;
+           background :#F5DEB3;
+           background-color:#F5DEB3;
+}
+ul.list li.DivCommonSelected2 
+{
+      filter:alpha(opacity=50); opacity: 0.5;
+            background :green;
+            background-color:#BBFFEE;
+}
+ul.list li.DivCommonSelected3 
+{
+      filter:alpha(opacity=50); opacity: 0.5;
+            background :#F5DEB3;
+            background-color:#F5DEB3;
+}

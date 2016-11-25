@@ -1,0 +1,289 @@
+﻿.sct-container, .sct-container dl, .sct-container dt, .sct-container dd, .sct-container ul, .sct-container ol, .sct-container li, .sct-container h1, .sct-container h2, .sct-container h3, .sct-container h4, .sct-container h5, .sct-container h6, .sct-container pre, .sct-container form, .sct-container fieldset, .sct-container input, .sct-container textarea, .sct-container p {
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+.sct-container .sct-input { cursor: pointer; }
+
+
+.sct-container .sct-box {
+    height: 100px;
+    position: absolute;
+    top: 3%;
+    left: 0%;
+    /*bottom: 10%;*/
+    right: 0;
+    margin: auto;
+    z-index: 9999;
+    background: white;
+    border: 1px solid #333;
+    border-bottom: 3px solid #333;
+}
+
+.sct-container ul { list-style: none; }
+
+.sct-container a { text-decoration: none; }
+
+.sct-container .sct-box .sct-title {
+    color: white;
+    font-size: 16px;
+    background: black;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+}
+
+.sct-box .sct-title h2 {
+    float: left;
+    font-weight: bold;
+    line-height: 50px;
+    border: 0;
+}
+
+.close-btn {
+    float: right;
+    cursor: pointer;
+}
+
+.sct-box .sct-list-con {
+    font-family: microsoft yahei;
+    background: white;
+}
+
+.sct-box .sct-list-con .sct-list, .sct-box .sct-list-con .sct-index-con {
+    padding: 0 15px;
+    overflow-y: auto;
+    color: #666;
+    font-size: 14px;
+}
+
+/* 顶部分类导航 start */
+
+.sct-box .sct-nav-con {
+    padding: 20px 0 20px 20px;
+    background: #f6f6f6;
+    border-bottom: 1px solid #eeeeee;
+    margin: 0 0 20px;
+}
+
+.sct-box .sct-nav-con .sct-nav-cmb {
+    margin: 0 10px 0 0;
+    width: 290px;
+    border: 1px solid #cccccc;
+    padding: 2px 5px;
+}
+
+.sct-box .sct-nav-con .maxChecked{
+    color:orangered;
+    font-weight: bold;
+}
+
+
+/* 索引 Start */
+
+.sct-box .sct-list-con .sct-index-con {
+    margin-top: 15px;
+    height: 40px; /*edit by wpf change to 50 from 40*/
+}
+
+.sct-box .sct-list-con .sct-index {
+    clear: both;
+    overflow: hidden;
+    zoom: 1;
+    color: #999;
+    padding: 0 0 0 3px;
+}
+
+.sct-box .sct-list-con .sct-index li {
+    float: left;
+    /*display: inline;*/
+    margin: 0 5px;
+    clear: none;
+}
+
+.sct-box .sct-list-con .sct-index li.current { border-bottom: 2px solid #336699; }
+
+.sct-box .sct-list-con .sct-index li.current a { color: #333; }
+
+.sct-box .sct-list-con .sct-index li a {
+    display: block;
+    padding: 0 4.5px;
+    color: #999;
+    line-height: 24px;
+}
+
+.sct-box .sct-list-con .sct-index .idx-disable{
+    color: #d3d3d3;
+    cursor: default;
+}
+
+/* 索引 End */
+
+.sct-box .sct-list-con .sct-index-sp {
+    border: 1px solid #f6f6f6;
+    margin-top: -2px;
+}
+
+
+.sct-box .sct-list-con .sct-list .sct-items { height: 450px; }
+
+.sct-items dl {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0 0 13px;
+}
+
+.sct-items dl label.item-index {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+.sct-items dl dt.item-category {
+    color: #333;
+    font-size: 16px;
+    margin: 0 0 15px;
+}
+
+.sct-items dl dd label {
+    margin: 0 30px 20px 0;
+    display: inline-block;
+}
+
+.sct-items dd label input[type='checkbox'] { vertical-align: middle; }
+
+.sct-items dl dd label span {
+    vertical-align: middle;
+    margin-left: 3px;
+    -moz-user-select:none;/*火狐*/
+    -webkit-user-select:none;/*webkit浏览器*/
+    -ms-user-select:none;/*IE10*/
+    -khtml-user-select:none;/*早期浏览器*/
+    user-select:none;
+}
+
+.sct-container .sct-bottom {
+    background: #f6f6f6;
+    border-top: 1px solid #eeeeee;
+    padding: 20px 0 20px 20px;
+}
+
+.sct-container .sct-bottom dd {
+    max-height: 50px;
+    overflow-y: scroll;
+    padding-right: 10px;
+    -moz-user-select:none;/*火狐*/
+    -webkit-user-select:none;/*webkit浏览器*/
+    -ms-user-select:none;/*IE10*/
+    -khtml-user-select:none;/*早期浏览器*/
+    user-select:none;
+}
+
+.sct-bottom .clean { color: orange; }
+
+.sct-bottom dl { margin: 0 0 10px; }
+
+.sct-bottom dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 0 15px;
+    color: #666;
+}
+
+.sct-bottom dl dd { word-wrap: break-word; }
+
+
+.sct-bottom dl dd label {
+    font-family: 宋体, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    overflow: hidden;
+    margin: 10px 30px 5px 0;
+    line-height: 2;
+}
+
+.sct-bottom dl dd label input[type='checkbox'] { vertical-align: middle; }
+
+.sct-bottom dl dd label span {
+    vertical-align: middle;
+    margin-left: 3px;
+}
+
+.sct-container .sct-btn {
+    padding: 0 0 15px 0;
+    height: 30px;
+    clear: both;
+    overflow: hidden;
+    zoom: 1;
+    text-align: center;
+    background: white;
+}
+
+.sct-container .opt-btn {
+    /*display: block;*/
+    background: orange;
+    border: 1px solid #d68a41;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    height: 28px;
+    line-height: 28px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 13px;
+    width: 90px;
+    margin: 10px;
+    padding: 0;
+}
+
+/* ------------------------------- */
+
+.sct-container .sct-overlay {
+    position: fixed;
+    visibility: hidden;
+    -ms-opacity: 0;
+    opacity: 0;
+    /*top: -25%;*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    /*height: 150%;*/
+    height: 100%;
+    background: #000000;
+    background: rgba(0, 0, 0, .5);
+    z-index: 0;
+}
+
+.sct-container .sct-show {
+    visibility: visible;
+    -ms-opacity: 1;
+    opacity: 1;
+    z-index: 2000;
+}
+
+@media only screen and (max-height: 800px) {
+    .sct-container .sct-box{
+    	max-width: 800px;
+    }
+
+    .sct-container .sct-box .sct-items {
+        max-height:300px;
+    }
+}
+
+@media only screen and (max-height: 700px) {
+    .sct-container .sct-box{
+    	max-width: 800px;
+    }
+
+    .sct-container .sct-box .sct-items {
+        max-height:250px;
+    }
+
+}

@@ -1,0 +1,91 @@
+﻿<header>
+    @{
+        //   Public.UserManage.Web.Model.MenuModelOperation.CreateXml();
+      
+        var urlController = ViewContext.RouteData.Values["controller"].ToString();
+        var urlAction = ViewContext.RouteData.Values["action"].ToString();
+
+        var url = "/" + urlController + "/" + urlAction;
+        List<Public.UserManage.Web.Model.MenuModel> MenuList = null;
+        if (HttpContext.Current.Session["MenuList"] != null)
+        {
+            MenuList = (List<Public.UserManage.Web.Model.MenuModel>)HttpContext.Current.Session["MenuList"];
+        }
+        else
+        {
+            MenuList = Public.UserManage.Web.Model.MenuModelOperation.LoadMenu();
+           
+
+            HttpContext.Current.Session["MenuList"] = MenuList;
+        }
+        //获取当前url对应的菜单
+        Public.UserManage.Web.Model.MenuModel menuz = new Public.UserManage.Web.Model.MenuModel();
+        menuz.MenuList = new List<Public.UserManage.Web.Model.MenuModel>();
+
+        menuz = MenuList.Find(r =>  Public.UserManage.Web.Model.MenuModelOperation.IsCurrentModule(r,url));
+
+
+
+        if (menuz == null && MenuList.Count > 0)
+        {
+            menuz = MenuList[0];
+        }
+    }
+    
+        <div class="headbox">
+            <h2>内容管理系统cms</h2>
+            <div class="menu">
+                <ul class="list">
+                 
+                  
+                    @{  var hctx = new HttpContextWrapper(HttpContext.Current);
+                        foreach (Public.UserManage.Web.Model.MenuModel menu in MenuList)
+                        {
+                            <li @(menu.Url == menuz.Url ? "class=current" : "") ><a href="@(string.IsNullOrEmpty(menu.Url) ? string.Empty : UrlHelper.GenerateContentUrl(menu.Url, hctx))">@menu.Name</a></li>
+                        }
+                     }
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <div class="menutwo">
+                <ul class="list">
+                    @{
+                        if (menuz != null && menuz.MenuList != null && menuz.MenuList.Count > 0)
+                        {
+                            string query = HttpContext.Current.Request.Url.Query;
+                            string _class = "";
+                            foreach (Public.UserManage.Web.Model.MenuModel menul in menuz.MenuList)
+                            {
+
+                                if (!string.IsNullOrEmpty(menul.Param))
+                                {
+                                    _class = menul.Url.IndexOf(url, StringComparison.InvariantCultureIgnoreCase) >= 0 && query.IndexOf(menul.Param, StringComparison.InvariantCultureIgnoreCase) >= 0 ? "class=current" : "";
+                                    if (string.IsNullOrEmpty(_class))
+                                    {
+                                        _class = Public.UserManage.Web.Model.MenuModelOperation.IsCurrentChild(menul, url) ? "class=current" : "";
+                                    }
+                                }
+                                else
+                                {
+                                    _class = Public.UserManage.Web.Model.MenuModelOperation.IsCurrent(menul, url) ? "class=current" : "";
+                                }
+
+                                <li @_class><a href="@(string.IsNullOrEmpty(menul.Url) ? string.Empty : UrlHelper.GenerateContentUrl(menul.Url, hctx))">@menul.Name</a></li>
+                            }
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="login">
+                <span>当前用户：<a target="_blank" href="@Url.Action("UpdateSysUserDataPage", "SysUser")">??</a></span>
+                <a href="@Url.Action("Logout", "Account")">退出登录</a>
+              
+
+                  <a href="#"  onclick="AddFeedBackDialog()">反馈</a>
+            </div>
+        </div>
+
+        <div id="FeedBackDialog" style ="display:none;overflow:hidden;"  title="Dialog Title"></div>
+
+      
+    </header>

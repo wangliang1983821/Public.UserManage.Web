@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="jquery.selector.css" />
+    <script src="jquery-2.1.4.min.js"></script>
+    <!--<script src="jquery.selector-0.1.js" charset="gbk"></script>-->
+    <script src="jquery.selector-0.1.min.js" charset="gbk"></script>
+    <title></title>
+</head>
+<body>
+
+    <div id="selector1" class="sct-container">
+        <input type="text" class="sct-input" />
+    </div>
+
+    <div style="margin-top:50px;">
+        <p>
+            <input type="text" id="chkId" />
+            <input type="button" id="check" value="选中">
+            <input type="button" id="uncheck" value="不选中">
+        </p>
+    </div>
+
+    <script>
+        var data = '[' +
+            '{"text": "石家庄","category": 13000,"id":901},' +
+            '{"text":"唐山","category":13000,"id":902},' +
+            '{"text":"秦皇岛","category":13000,"id":905},' +
+            '{"text":"邯郸","category":13000,"id":907},' +
+            '{"text":"邢台","category":13000,"id":903},' +
+            '{"text":"保定","category":13000,"id":910},' +
+            '{"text":"张家口","category":13000,"id":911},' +
+            '{"text":"承德","category":13000,"id":912},' +
+            '{"text":"沧州","category":13000,"id":909},' +
+            '{"text":"哈尔滨","category":230000,"id":230100},' +
+            '{"text":"鸡西","category":230000,"id":230300},' +
+            '{"text":"长春","category":220000,"id":220100}' +
+            ']';
+
+        var sector = $.fn.selector.init($("#selector1"), {
+            title: "测试标题",
+            width: 800,
+            height: 450,
+            maxChecked: 2,
+            callback: {
+                selected: selected
+            }
+        }, data);
+
+        $("#check").click(function () {
+            var id = $("#chkId").val();
+            if (id) {
+                sector.checked([id]);
+            }
+        });
+
+
+        $("#uncheck").click(function () {
+            var id = $("#chkId").val();
+            if (id) {
+                sector.unchecked([id]);
+            }
+        });
+
+        function selected() {
+            alert(sector.getValue("id", ";"));
+        }
+    </script>
+
+</body>
+
+</html>

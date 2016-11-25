@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=unicode">
+    <!--defaultCSS-->
+    <title>jquery.selector.js v1.0 帮助文档</title>
+
+
+
+
+
+    <style type="text/css" id="wiz_todo_style_id" wiz_link_version="01.00.09">
+        .wiz-todo, .wiz-todo-img {
+            width: 16px;
+            height: 16px;
+            cursor: default;
+            padding: 0 10px 0 2px;
+            vertical-align: -10%;
+            -webkit-user-select: none;
+        }
+
+        .wiz-todo-label {
+            display: inline-block;
+            padding-top: 7px;
+            padding-bottom: 6px;
+            line-height: 1.5;
+        }
+
+        .wiz-todo-label-checked {
+            color: #666;
+        }
+
+        .wiz-todo-label-unchecked {
+            text-decoration: initial;
+        }
+
+        .wiz-todo-completed-info {
+            padding-left: 44px;
+            display: inline-block;
+        }
+
+        .wiz-todo-avatar {
+            width: 20px;
+            height: 20px;
+            vertical-align: -20%;
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+
+        .wiz-todo-account, .wiz-todo-dt {
+            color: #666;
+        }
+    </style>
+
+
+    <style type="text/css" id="wiz_custom_css">
+        body {
+            font-family: 微软雅黑,"Microsoft YaHei", Georgia,Helvetica,Arial,sans-serif,宋体, PMingLiU,serif;
+            font-size: 10.5pt;
+            line-height: 1.5;
+        }
+
+        html, body {
+        }
+
+        h1 {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        h4 {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        h5 {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        h6 {
+            font-size: 1.0em;
+            font-weight: bold;
+        }
+
+        img {
+            border: 0;
+            max-width: 100%;
+            height: auto !important;
+        }
+
+        blockquote {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid #bbbbbb;
+        }
+
+        td {
+            border-collapse: collapse;
+            border: 1px solid #bbbbbb;
+        }
+    </style>
+
+    <link type="text/css" rel="stylesheet" id="wiz_code_highlight_link" href="styles/wiz_code_highlight_15.css">
+
+</head>
+
+<body style="">
+    <div><br></div><div>该插件数据包括三个部分：索引（目前不能自定义）、分类、列表项。分类信息可以省略，当包含分类信息时，会按照分类的首写字母进行索引；当不包含分类时会按照列表项的首字母进行索引。</div><br><div><img src="styles/d9cb91fc-a532-468b-8d33-bbcf6992f77b.png" border="0" alt="img1.png" name="" width="614" height="592">&nbsp; &nbsp; &nbsp; <img src="styles/4bf39ccd-0d33-488d-9dba-48da6df0b726.png" border="0" alt="img2.png" name="" width="640" height="593"><div><br></div><div>使用方法如下：</div><div><br></div><div>引用js，引用时必须加上charset=“gbk”属性，否则会出现乱码</div><div><div><pre class="prettyprint linenums prettyprinted"><ol class="linenums" style="padding-left: 0px;"><li style="list-style-type: none; padding-left: 0px;" class="L0"><code class="language-html"><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"jquery.selector-0.1.min.js"</span><span class="pln"> </span><span class="atn">charset</span><span class="pun">=</span><span class="atv">"gbk"</span><span class="tag">&gt;&lt;/script&gt;</span></code></li></ol></pre></div></div><div><div><pre class="prettyprint linenums prettyprinted"><ol class="linenums" style="padding-left: 0px;"><li style="list-style-type: none; padding-left: 0px;" class="L0"><code class="language-html"><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"selector1"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"sct-container"</span><span class="tag">&gt;</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code class="language-html"><span class="pln">    </span><span class="tag">&lt;input</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text"</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"sct-input"</span><span class="tag">/&gt;</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code class="language-html"><span class="tag">&lt;/div&gt;</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code class="language-html"></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code class="language-html"><span class="tag">&lt;script&gt;</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code class="language-html"><span class="pln">    </span><span class="kwd">var</span><span class="pln"> data </span><span class="pun">=</span><span class="pln"> </span><span class="str">'['</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code class="language-html"><span class="pln">            </span><span class="str">'{"text": "石家庄","category": 13000,"id":901},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code class="language-html"><span class="pln">            </span><span class="str">'{"text":"唐山","category":13000,"id":902},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code class="language-html"><span class="pln">            </span><span class="str">'{"text":"秦皇岛","category":13000,"id":905},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code class="language-html"><span class="pln">            </span><span class="str">'{"text":"邯郸","category":13000,"id":907},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code class="language-html"><span class="pln">            </span><span class="str">'{"text":"邢台","category":13000,"id":903},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code class="language-html"><span class="pln">            </span><span class="str">'{"text":"保定","category":13000,"id":910},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code class="language-html"><span class="pln">            </span><span class="str">'{"text":"张家口","category":13000,"id":911},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code class="language-html"><span class="pln">            </span><span class="str">'{"text":"承德","category":13000,"id":912},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code class="language-html"><span class="pln">            </span><span class="str">'{"text":"沧州","category":13000,"id":909},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code class="language-html"><span class="pln">            </span><span class="str">'{"text":"哈尔滨","category":230000,"id":230100},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code class="language-html"><span class="pln">            </span><span class="str">'{"text":"鸡西","category":230000,"id":230300},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code class="language-html"><span class="pln">            </span><span class="str">'{"text":"长春","category":220000,"id":220100},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code class="language-html"><span class="pln">            </span><span class="str">']'</span><span class="pun">;</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code class="language-html"><span class="pln">    </span><span class="kwd">var</span><span class="pln"> categories</span><span class="pun">=</span><span class="str">'['</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code class="language-html"><span class="pln">            </span><span class="str">'{"id":13000,"text":"河北省"},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code class="language-html"><span class="pln">            </span><span class="str">'{"id":14000,"text":"山西省"},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code class="language-html"><span class="pln">            </span><span class="str">'{"id":230000,"text":"黑龙江"},'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code class="language-html"><span class="pln">            </span><span class="str">'{"id":220000,"text":"吉林省"}'</span><span class="pln"> </span><span class="pun">+</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code class="language-html"><span class="pln">            </span><span class="str">']'</span><span class="pun">;</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code class="language-html"></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code class="language-html"><span class="pln">    </span><span class="kwd">var</span><span class="pln"> sector</span><span class="pun">=</span><span class="pln"> $</span><span class="pun">.</span><span class="pln">fn</span><span class="pun">.</span><span class="pln">selector</span><span class="pun">.</span><span class="pln">init</span><span class="pun">(</span><span class="pln">$</span><span class="pun">(</span><span class="str">"#selector1"</span><span class="pun">),</span><span class="pln"> </span><span class="pun">{</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code class="language-html"><span class="pun">        title:"标题",</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code class="language-html"><span class="pln">        categories</span><span class="pun">:</span><span class="pln">categories</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L8"><code class="language-html"><span class="pln">        width</span><span class="pun">:</span><span class="lit">800</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L9"><code class="language-html"><span class="pln">        height</span><span class="pun">:</span><span class="lit">500</span><span class="pun">,</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L0"><code class="language-html"><span class="pln">        items</span><span class="pun">:</span><span class="pln">data</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L1"><code class="language-html"><span class="pln">    </span><span class="pun">});</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L2"><code class="language-html"></code></li><li style="list-style-type: none; padding-left: 0px;" class="L3"><code class="language-html"><span class="pln">    $</span><span class="pun">(</span><span class="str">"#test"</span><span class="pun">).</span><span class="pln">click</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(){</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L4"><code class="language-html"><span class="pln">        alert</span><span class="pun">(</span><span class="pln">sector</span><span class="pun">.</span><span class="pln">getSelected</span><span class="pun">().</span><span class="pln">length</span><span class="pun">);</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L5"><code class="language-html"><span class="pln">    </span><span class="pun">});</span></code></li><li style="list-style-type: none; padding-left: 0px;" class="L6"><code class="language-html"></code></li><li style="list-style-type: none; padding-left: 0px;" class="L7"><code class="language-html"><span class="tag">&lt;/script&gt;</span></code></li></ol></pre></div><div><br></div></div><div>items：表示列表项数据，可以通过添加属性来保存额外的附加数据</div><div>categories：表示分类数据，该项可以省略</div><div><br></div><div><font color="#ff6820"><b>对于item和categories，代码中列出的项均为必填项。</b></font></div><div><br></div><div><span style="font-size: 10.5pt; line-height: 1.5;"><br></span></div><div>方法/属性说明:</div><div><br></div><div><table cellspacing="0" cellpadding="0" style="width: 100%;"><tbody><tr><td wiz_tag_attr_bk_color="" style="">名称</td><td wiz_tag_attr_bk_color="" style="">说明</td></tr><tr><td wiz_tag_attr_bk_color="" style="">getSelected(int:id)</td><td wiz_tag_attr_bk_color="" style="">获取到当前所选中的对象数组，数组中对象的属性与传入的item json属性相同</td></tr><tr><td wiz_tag_attr_bk_color="" style="">checked(int:id)</td><td wiz_tag_attr_bk_color="" style="">设置选中一个对象</td></tr><tr><td wiz_tag_attr_bk_color="" style="">unchecked(int:id)</td><td wiz_tag_attr_bk_color="" style="">取消选中一个对象</td></tr><tr><td wiz_tag_attr_bk_color="" style="">close()</td><td wiz_tag_attr_bk_color="" style="">关闭显示对话框</td></tr><tr><td style="" colspan="1">dispose()</td><td style="" colspan="1">释放资源，在不需要该控件的时候通过该方法释放数据</td></tr></tbody></table></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br><div><br></div><div><br></div><div><br></div><div><br></div></div></div>
+</body>
+</html>

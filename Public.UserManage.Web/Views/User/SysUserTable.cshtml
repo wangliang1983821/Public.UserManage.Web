@@ -1,0 +1,82 @@
+﻿@model Webdiyer.WebControls.Mvc.PagedList<UserPermission.User.User>
+@using Webdiyer.WebControls.Mvc
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table_result">
+    <tr>
+        <th width="5%">ID</th>
+        <th width="15%">姓名</th>
+        <th width="15%">登录名称</th> 
+        <th width="15%">城市</th>
+        <th width="15%">创建时间</th>
+        <th width="10%">操作</th>
+    </tr>
+    @{
+        if (Model != null && Model.Count > 0)
+        {
+          
+            int i = 0;
+            foreach (UserPermission.User.User dn in Model)
+            {
+                string str = dn.IsLock ? "已禁用" : "禁用";
+                string classStr = "class=bg";
+                if (i % 2 == 0)
+                {
+                    classStr = "";
+                }
+
+                {
+                    <tr @classStr>
+                        <td>@dn.Id</td>
+                        <td>@dn.TrueName</td>
+                        <td>@dn.Name</td>
+                       
+                        <td>@( string.IsNullOrEmpty(dn.CityName) ? "全国" : dn.CityName)</td>
+                        <td>@dn.CreateTime</td>
+                        <td>
+                            <div class="caozuo">
+                                @{
+                    
+                        <a href="javascript:void(0);" onclick="UpdateDialog('@dn.Id')">修改</a>
+    <a href="javascript:void(0);" onclick="LockSysUser('@dn.Id')">@str</a>
+                                    <a href="javascript:void(0);" onclick="UpdateDataDialog('@dn.Id')">修改用户资料</a>
+                    
+                                }
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+                i++;
+
+
+            }
+        }
+
+
+    }
+
+</table>
+
+<div class="the_pages">
+    @Ajax.Pager(Model, new PagerOptions
+   {
+       Id = "mypager1",
+       PageIndexParameterName = "PageIndex",
+       PagerItemTemplate = "{0}",
+       CurrentPagerItemTemplate = "<a class=\"linknow\">{0}</a>",
+       DisabledPagerItemTemplate = "<span class='preview_off'>{0}</span>",
+       FirstPageText = "首页",
+       LastPageText = "尾页",
+       NextPageText = "下一页",
+       PrevPageText = "上一页",
+   },
+            new MvcAjaxOptions
+            {
+                UpdateTargetId = "SysUser-list",
+                HttpMethod = "Post",
+                DataFormId = "SysUser-search",
+                EnableHistorySupport = false,
+            })
+</div>
+<script type="text/javascript">
+    $("#tem-c").html(@Model.TotalItemCount);
+</script>

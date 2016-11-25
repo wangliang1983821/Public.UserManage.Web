@@ -1,0 +1,227 @@
+﻿.headbox .menutwo { display: none; }
+
+.disable {
+    color: #999;
+    border: 1px solid #e1e1e1;
+    background: #e1e1e1;
+}
+
+
+
+/* jquery.dialog Start */
+
+.ui-dialog {
+    background: white;
+    padding: 0;
+    -ms-border-radius: 0;
+    border-radius: 0;
+    border: 1px solid #333;
+    border-bottom: 3px solid #333;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    background: #333;
+    border: none;
+    -ms-border-radius: 0;
+    border-radius: 0;
+    margin: 0;
+    line-height: 40px;
+}
+
+.ui-dialog .ui-dialog-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0px;
+}
+
+.ui-dialog .ui-dialog-titlebar-close { right: .9em; }
+
+
+.ui-dialog .ui-dialog-titlebar-close .ui-button-text { display: none;}
+
+
+
+
+.ui-dialog .ui-dialog-content { padding: 0; }
+
+.ui-widget-content .tc_table_result a {color:#336797;}
+/* jquery.dialog End */
+
+
+/* 块添加对话框 Start*/
+
+.p-add-form .formlist {
+    height: 510px;
+    overflow: auto;
+}
+
+.p-add-form .submit {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+
+.p-add-form .p-add-pl { float: left; }
+
+.p-add-form .p-add-pr { float: right; }
+
+
+.p-add-form .mobancslist {
+    width: 150px;
+    height: 100%;
+    height: 450px;
+}
+
+.p-add-form .mobancslist ul.list {
+    overflow: auto;
+    height: 410px;
+}
+
+.p-add-form .mobancslist ul.list li { cursor: pointer; }
+
+
+.p-add-form .p-params-content {
+    width: 400px;
+    height: 450px;
+    resize: none;
+}
+
+/* 块添加对话框 End*/
+
+
+/* 只读文本框 start */
+
+.ro { border: none; }
+
+/* 只读文本框 end */
+
+
+/* form验证错误样式 Start */
+
+.validation-summary-errors { color: red; }
+
+.field-validation-error {
+    display: block;
+    color: red;
+}
+
+/* form验证错误样式 End */
+
+
+/* jquery.dialog 对话框下方按钮位置 Start */
+
+.dlg-con {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.dlg-con-top {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    margin: auto;
+    top: 0;
+    bottom: 50px;
+    background: white;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.dlg-con-bottom {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    bottom: 0;
+    background: gray;
+    margin: 10px auto 0 auto;
+}
+
+/* jquery.dialog 对话框下方按钮位置 end */
+
+
+.ui-autocomplete {
+    height: 200px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+textarea{resize: none;}
+.mw350b{max-width: 350px;word-wrap: break-word;}
+.mw150b{max-width: 150px;word-wrap: break-word;}
+.mw100b{max-width: 100px;word-wrap: break-word;}
+
+
+/*  补充设计的样式  start */
+
+.formlist ul.list li input[type='button'] {
+    color: #fff;
+}
+
+.button_gray_b{cursor:pointer;}
+
+.table_result tr td {
+    max-width: 150px;
+    overflow-wrap: break-word;
+}
+.treebox{overflow:auto;}
+.one_zhizhen h5{height:auto;}
+.treebox .title{height:40px;}
+.treebox .title div
+{
+    text-align:center;float:left;font-size:14px;
+    line-height:40px;
+    font-weight:bold;
+    width:132px;
+    cursor:pointer;
+ }
+.treebox .title .on{background:white;color:Black;}
+.treebox .title .off{background:#efefef;color:Gray;
+                     border-bottom:1px solid #dedede;
+                     height:39px;}
+.treebox .title .lb{border-left:1px solid #dedede;}
+.treebox .title .rb{border-right:1px solid #dedede;}
+.valid-error{margin:5px 0;clear:both;color:Red;}
+/* noahAlert*/
+.noahAlertPanel
+{
+    top:0;position:fixed;
+    width:100%;height:100%;position:fixed;
+    background:#ccc url('jquery-ui/images/ui-bg_diagonals-thick_20_666666_40x40.png') repeat;opacity:0.5;
+}
+.openwindow{position:absolute;}
+/* noahAlert样式 end*/
+/*  补充设计的样式  end */
+
+
+/* 时间控件样式 start */
+
+input.datetime {
+    cursor: pointer;
+    
+}
+
+/* 时间控件样式 end */
+
+
+/* 覆盖 dialog中table的字体 */
+.ui-widget table {
+    font-size: 12px;
+    font-family: \5b8b\4f53, Arial, Helvetica, sans-serif;
+}
+
+.formlist ul.list li .pp_pagelist input 
+{
+    color:#999;
+}
+
+.contextMenu {
+  border:1px solid #cacaca;box-shadow:#cacaca 10px 10px inherit; position:absolute;background-color:white;padding:2px;
+}
+    .contextMenu li {
+      padding:5px 15px;
+      cursor:pointer;
+    }
+

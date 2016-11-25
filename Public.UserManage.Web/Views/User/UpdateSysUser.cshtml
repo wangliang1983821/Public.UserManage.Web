@@ -1,0 +1,123 @@
+﻿@{
+    Layout = null;
+}
+@model UserPermission.User.User
+@* <div class="tc_con">*@
+<!--弹层内容区域star-->
+@using (Ajax.BeginForm("UpdateSysUserSub", null, new AjaxOptions()
+      {
+          HttpMethod = "POST",
+          InsertionMode = InsertionMode.Replace,
+          UpdateTargetId = "SysUser-list",
+          OnBegin = "LoadTime.Begin",
+          OnComplete = "LoadTime.Complete"
+      }, new { id = "SysUser-Update" }))
+{
+    @Html.HiddenFor(m =>m.Id)
+    @Html.HiddenFor(m => m.IsDelete)
+    <div class="formlist">
+        <ul class="list">
+            <li>
+                <b>登录名：</b>
+                <div class="inp">
+                    @Model.Name
+                    <input type="hidden" id="Name" name="Name" value="@Model.Name " />
+                </div>
+            </li>
+            <li>
+                <b><em>*</em>姓名：</b>
+                <div class="inp">
+                    <input type="text" name="TrueName" id="TrueName" class="inputborder w280" value="@Model.TrueName" />
+                   
+                </div>
+            </li>
+
+            <li>
+                <b>所属城市：</b>
+                <div class="inp">
+                    <div id="citySect" class="sct-container">
+                        <input type="text" name='CityName' id='CityName' class="inputborder sct-input" value="@Model.CityName" />
+                        <input type="button" class="inputborder btn" style="cursor: pointer;color:black;" value="..." />
+                    </div>
+                    <input type="hidden" id='CityId' name='CityId' value="@Model.CityId" />
+
+                </div>
+            </li>
+            <li>
+                <b>用户属性：</b>
+                <div class="inp">
+                    <input type="checkbox" id="IsLock" name="IsLock" @(Model.IsLock  ? "checked='checked'" : "") value="true" />禁用
+                </div>
+            </li>
+          
+        </ul>
+
+        <div class="submit"><input type="submit" class="button_org_b button_90_30" value="确定" /><input type="button" id="btn_Close" class="button_gray_b button_90_30" value="取消" /></div>
+    </div>
+    @*   @{Html.EndForm();}*@
+}
+<script type="text/javascript">
+         var citySect2 = {};
+         var setting2 = {
+             title: "城市选择",
+             width: 800,
+             height: 400,
+             maxChecked: 1,
+             callback: {
+                selected: selected
+            }
+         };
+         function selected() {
+             $("#CityId").val(citySect2.getValue("id", ";"));
+         }
+         $(function ($) {
+             $.ajax({
+                 type: "GET",
+                 url: '@Url.Action("GetCityData", "Common")',
+                 success: function (data, status) {
+                     citydata = data;
+                     citySect2 = $.fn.selector.init($("#citySect"), setting2, citydata);
+                     citySect2.checked([$("#CityId").val()]);
+
+                     $("#CityName").autocomplete({
+                         source: CreateAutoLable(data),
+                         select: function (event, item) {
+
+                             $("#CityId").val(item.item.id);
+
+                         }
+                     });
+                     $("#CityName").blur(function () { if ($(this).val() == "") $("#CityId").val(""); });
+                 }
+             });
+
+
+
+             $("#btn_Close").click(function () {
+                 $("#dialog").dialog("close");
+             });
+             $("#SysUser-Update").validate({
+                 errorPlacement: function (error, element) {
+                     var p = $("<div class='valid-error'  />").append(error);
+                     p.appendTo(element.parent());
+                 },
+                 rules: {
+                     TrueName: {
+                         required: true,
+                         stringCheck:true,
+                         maxcnlength:20
+                     }
+                 },
+                 messages: {
+                     TrueName: {
+                         required: "没有填写名称"
+                     }
+                 }
+             });
+
+         });
+
+
+</script>
+<!--弹层内容区域end-->
+@*</div>*@
