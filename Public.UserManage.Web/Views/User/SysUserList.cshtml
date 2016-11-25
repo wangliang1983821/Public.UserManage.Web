@@ -59,6 +59,11 @@
                 </div>
             }
         </div>
+
+        <div>
+            <input type="button" value="添加" onclick="InsertDialog()" class="button_org_b button_90_30">
+        </div>
+
         <div class="resultbox">
             <div class="result_title">
                 <h2>查询结果</h2>
@@ -200,6 +205,20 @@
             $("#dialog").dialog("open");
         }
 
+        function InsertDialog() {
+            $("#dialog").dialog({
+                title: "添加",
+                autoOpen: false,
+                modal: true,
+                width: 600,
+                height: 310
+
+            });
+            $("#dialog").html("Load......");
+            $("#dialog").load("@Url.Action("InsertSysUser", "User")");
+            $("#dialog").dialog("open");
+        }
+
         function CloseDialog(data) {
 
             $("#dialog").dialog("close");
@@ -219,6 +238,9 @@
             $("#dialog").load("@Url.Action("UpdateSysUserData", "SysUser")" + "?id=" + id);
             $("#dialog").dialog("open");
         }
+
+      
+
 
         var CreateDialogDiv = function () {
             var d = '<div id="dialog" title="Dialog Title">' +

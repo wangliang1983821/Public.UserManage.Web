@@ -74,31 +74,6 @@ namespace UserPermission.Role
 
         #endregion
 
-        #region PermissionIds
-
-        private String m_permissionIds;
-
-        /// <summary>Gets or sets PermissionIds</summary>
-        public String PermissionIds
-        {
-            get { return m_permissionIds; }
-            set { m_permissionIds = value; }
-        }
-
-        #endregion
-
-        #region PermissionNames
-
-        private String m_permissionNames;
-
-        /// <summary>Gets or sets PermissionNames</summary>
-        public String PermissionNames
-        {
-            get { return m_permissionNames; }
-            set { m_permissionNames = value; }
-        }
-
-        #endregion
 
 
     }

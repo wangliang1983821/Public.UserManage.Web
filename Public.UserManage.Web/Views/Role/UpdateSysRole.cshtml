@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+@model UserPermission.Role.Role
+@* <div class="tc_con">*@
+<!--弹层内容区域star-->
+@using (Ajax.BeginForm("UpdateSysRoleSub", null, new AjaxOptions()
+      {
+          HttpMethod = "POST",
+          InsertionMode = InsertionMode.Replace,
+          UpdateTargetId = "SysRole-list",
+          OnBegin = "LoadTime.Begin",
+          OnComplete = "LoadTime.Complete"
+      }, new { id = "SysRole-Update" }))
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.IsDelete)
+    <div class="formlist">
+        <ul class="list">
+           
+            <li>
+                <b><em>*</em>姓名：</b>
+                <div class="inp">
+                    <input type="text" name="Name" id="Name" class="inputborder w280" value="@Model.Name" />
+
+                </div>
+            </li>
+
+        </ul>
+
+        <div class="submit"><input type="submit" class="button_org_b button_90_30" value="确定" /><input type="button" id="btn_Close" class="button_gray_b button_90_30" value="取消" /></div>
+    </div>
+    @*   @{Html.EndForm();}*@
+}
+<script type="text/javascript">
+     
+         $(function ($) {
+            
+
+
+             $("#btn_Close").click(function () {
+                 $("#dialog").dialog("close");
+             });
+             $("#SysRole-Update").validate({
+                 errorPlacement: function (error, element) {
+                     var p = $("<div class='valid-error'  />").append(error);
+                     p.appendTo(element.parent());
+                 },
+                 rules: {
+                     Name: {
+                         required: true,
+                         stringCheck:true,
+                         maxcnlength:20
+                     }
+                 },
+                 messages: {
+                     Name: {
+                         required: "没有填写名称"
+                     }
+                 }
+             });
+
+         });
+
+
+</script>
+<!--弹层内容区域end-->
+@*</div>*@

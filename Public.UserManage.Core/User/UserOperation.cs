@@ -14,21 +14,24 @@ namespace UserPermission.User
     {
       
 
-        public int Insert()
+        public int Insert(User u=null)
         {
             int result = 0;
-            string sqlCommandText = @"INSERT INTO [User] (Name,Password,TureName,Type,CreateTime,IsDelete) VALUES (
+            string sqlCommandText = @"INSERT INTO [User] (Name,PassWord,TrueName,Type,CreateTime,IsDelete,IsLock,CityId,CityName) VALUES (
     @Name,
-    @Password,
-    @TureName,
+    @PassWord,
+    @TrueName,
     @Type,
-    @CreateTime,
-    @IsDelete
+    getdate(),
+    @IsDelete,
+    @IsLock,
+    @CityId,
+    @CityName
 )";
             using (IDbConnection conn = new SqlConnection(Config.GetConnectionString("UserPermission")))
             {
-               
-                 result = conn.Execute(sqlCommandText, this);
+                 User pu = u == null ? this : u;
+                 result = conn.Execute(sqlCommandText, pu);
                
             }
             return result;
@@ -63,7 +66,7 @@ namespace UserPermission.User
 
 
 
-        public List<User> GetList(string trueName = "", string name = "", int isLock = -1, string cityids = "", int pageIndex = 1, int pageSize = 10)
+        public List<User> GetList(string trueName = "", string name = "", int isLock = -1, string cityids = "", int pageIndex = 1, int pageSize = 20)
         {
             KeyValuePair<string, DynamicParameters> kvp = GetQuery(trueName, name, isLock, cityids);
             string query = " select * from  (select *,ROW_NUMBER() OVER (ORDER BY Id DESC) as rank from [User]  where IsDelete=0 "+kvp.Key+" ) as t where t.rank between  " + ((pageIndex - 1) * pageSize + 1) + "  and  " + pageIndex * pageSize;

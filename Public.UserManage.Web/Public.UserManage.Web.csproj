@@ -134,6 +134,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -651,6 +652,11 @@
     <Content Include="Views\User\SysUserTable.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\User\UpdateSysUser.cshtml" />
+    <Content Include="Views\User\InsertSysUser.cshtml" />
+    <Content Include="Views\Role\SysRoleList.cshtml" />
+    <Content Include="Views\Role\SysRoleTable.cshtml" />
+    <Content Include="Views\Role\InsertSysRole.cshtml" />
+    <Content Include="Views\Role\UpdateSysRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

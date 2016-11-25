@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "SysRoleList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Public.UserManage.Web.Model.SearchCodition
+<div class="con_all">
+    <!--右侧内容-->
+    <div class="main main_all">
+        <div class="formlist formlist_search">
+            @using (Ajax.BeginForm("SysRoleList", null, new AjaxOptions()
+      {
+          HttpMethod = "POST",
+          InsertionMode = InsertionMode.Replace,
+          UpdateTargetId = "SysRole-list",
+          OnBegin = "beginprogress",
+          OnComplete = "endprogress"
+      }, new { id = "SysRole-search" }))
+            {
+                <ul class="list">
+                    <li>
+                        <b>角色名：</b>
+                        <div class="inp">
+                            <input type="text" id="SearchName" name="SearchName" value="@Model.SearchName" class="sct-input" />
+
+                        </div>
+                    </li>
+                  
+
+                </ul>
+                @Html.HiddenFor(m => m.PageSize)
+                <div class="submit">
+                    <input type="button" onclick="sub()" value="查询" class="button_org_b button_90_30" />
+
+                </div>
+            }
+        </div>
+
+        <div>
+            <input type="button" value="添加" onclick="InsertDialog()" class="button_org_b button_90_30">
+        </div>
+
+        <div class="resultbox">
+            <div class="result_title">
+                <h2>查询结果</h2>
+                <div class="gongyou"><span>共有<strong id="tem-c"></strong>条符合您的查询条件</span></div>
+                <div class="gongyou" id="progress"><img src="@Url.Content("~/Content/image/13221821.gif")" /></div>
+                <div class="xianshi">
+                    <span>每页显示</span><select id="tem-item-count" class="inputborder w70">
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select><span>条</span>
+                </div>
+            </div>
+            <div id="SysRole-list">
+                @{ Html.RenderPartial("SysRoleTable", ViewBag.list as Webdiyer.WebControls.Mvc.PagedList<UserPermission.Role.Role>); }
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript" src="@Url.Content("~/Content/DataArea/LoadTime.js")"></script>
+    <script type="text/javascript">
+      
+
+        var pager = null;
+
+
+      
+
+        $(function ($) {
+            document.onkeydown = function (e) {
+                var keycode = document.all ? event.keyCode : e.which;
+                if (keycode == 13) {
+                    sub();
+                }
+            }
+
+
+
+            CreateDialogDiv();
+
+            pager = Webdiyer.MvcPagers.getById("mypager1");
+
+            // pager.loadingElementId = "#progress";
+            pager.onBegin = 'beginprogress';
+            pager.onComplete = 'endprogress';
+            pager.allowReload = true;
+            $("#progress").hide(0);
+            LoadTime.Append('@Url.Content("~/Content/image/13221821.gif")');
+        });
+
+        $("#tem-item-count").change(function () {
+            $("#PageSize").val($(this).val());
+            sub();
+        });
+
+        function sub() {
+
+            Webdiyer.__ajaxPages["PageIndex"] = 1;
+            $("#SysRole-search").submit();
+            try {
+                // pager.goToPage(2);
+                $("#dialog").dialog("close");
+            } catch (e)
+            { }
+        }
+        function pagesub() {
+            var pager = Webdiyer.MvcPagers.getById("mypager1");
+            try {
+                //  Webdiyer.__ajaxPages["PageIndex"] = 100000;
+                $("#dialog").dialog("close");
+            } catch (e) { }
+
+            pager.__ajax(pager.currentPageIndex, { type: pager.httpMethod, data: [] });
+            //  $("#Template-search").submit();
+
+
+        }
+        function UpdateDialog(id) {
+            $("#dialog").dialog({
+                title: "修改",
+                autoOpen: false,
+                modal: true,
+                width: 600,
+                height: 310
+
+            });
+            $("#dialog").html("Load......");
+            $("#dialog").load("@Url.Action("UpdateSysRole", "Role")" + "?id=" + id);
+            $("#dialog").dialog("open");
+        }
+
+        function InsertDialog() {
+            $("#dialog").dialog({
+                title: "添加",
+                autoOpen: false,
+                modal: true,
+                width: 600,
+                height: 310
+
+            });
+            $("#dialog").html("Load......");
+            $("#dialog").load("@Url.Action("InsertSysRole", "Role")");
+            $("#dialog").dialog("open");
+        }
+
+        function CloseDialog(data) {
+
+            $("#dialog").dialog("close");
+            LoadTime.html(data);
+        }
+
+       
+
+
+        var CreateDialogDiv = function () {
+            var d = '<div id="dialog" title="Dialog Title">' +
+               '</div>';
+
+            $("body").append(d).find("#dialog").hide();
+
+
+        }
+      
+
+
+    </script>
+}

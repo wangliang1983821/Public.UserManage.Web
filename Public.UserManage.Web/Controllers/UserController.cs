@@ -72,6 +72,24 @@ namespace Public.UserManage.Web.Controllers
 
         }
 
+        public ActionResult InsertSysUser()
+        {
+            User u=new User ();
+            return View(u);
+        }
+        [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateInput(false)]
+        public ActionResult InsertSysUserSub(User u)
+        {
+            UserOperation uo = new UserOperation();
+            u.CreateTime = DateTime.Now;
+            u.IsDelete = false;
+            u.Type = 1;
+            uo.Insert(u);
+            return JavaScript("pagesub();");
+        }
+
+
         public ActionResult LockSysUser(int id)
         {
             if (id == null) return RedirectToAction("SysUserList");
