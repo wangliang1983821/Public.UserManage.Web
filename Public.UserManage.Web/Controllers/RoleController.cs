@@ -88,6 +88,17 @@ namespace Public.UserManage.Web.Controllers
         }
 
 
+        public ActionResult DeleteSysRole(int id)
+        {
+        
+
+            RoleOperation uo = new RoleOperation();
+
+
+            return Content(uo.Delete(id));
+
+        }
+
      
     }
 }

@@ -3,6 +3,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+@{
+  
+    var treeJson = "";
+   
+      List< UserPermission.Role.Role> list=  ViewBag.roles as  List< UserPermission.Role.Role>;
+      List<Public.UserManage.Web.Model.TreeMenu> treeList = new List<Public.UserManage.Web.Model.TreeMenu>();
+        foreach (UserPermission.Role.Role m in list)
+        {
+
+
+            treeList.Add(new Public.UserManage.Web.Model.TreeMenu { id = m.Id.ToString(), name = m.Name, children = null });
+
+        }
+        treeJson = Newtonsoft.Json.JsonConvert.SerializeObject(treeList);
+
+    
+
+
+}
+
 @model Public.UserManage.Web.Model.SysUserSearchCodition
 <div class="con_all">
     <!--右侧内容-->
@@ -85,6 +106,13 @@
         </div>
     </div>
 </div>
+<input type="hidden" id="hid_MyMenuJson" value="@treeJson" />
+<div id="MyMenuDialog" style="display:none;overflow:auto;" title="Dialog Title">
+    <div>
+        <ul id="treeMyMenu" class="ztree"></ul>
+    </div>
+
+</div>
 
 @section scripts{
     <link rel="Stylesheet" href="@Url.Content("~/Scripts/jquery.selector/v0.1/jquery.selector.css")" type="text/css" />
@@ -93,153 +121,260 @@
     <script type="text/javascript" src="@Url.Content("~/Scripts/webuploader/webuploader.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/nc.news.uploadimage.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Content/DataArea/LoadTime.js")"></script>
+<link rel="stylesheet" href="@Url.Content("~/Content/ztree/css/zTreeStyle/zTreeStyle.css")" type="text/css">
+<script type="text/javascript" src="@Url.Content("~/Content/ztree/jquery.ztree.core-3.5.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/ztree/jquery.ztree.excheck-3.5.min.js")"></script>
     <script type="text/javascript">
-        var citydata = null;
-        var cardata = null;
-        var ids = [],
-            citySect1 = {},
-            setting = {
-                title: "城市选择",
-                width: 800,
-                height: 400
-            };
+    var citydata = null;
+    var cardata = null;
+    var ids = [],
+        citySect1 = {},
+        setting = {
+            title: "城市选择",
+            width: 800,
+            height: 400
+        };
 
-        var pager = null;
+    var pager = null;
 
 
-        function CreateAutoLable(data) {
-            if (typeof data == 'string') {
-                data = JSON.parse(data);
-            }
-            var labArr = [];
-            $.each(data, function (i, n) {
-                $.each(n.children, function (i, n) {
-                    labArr.push({ id: n.id, value: n.text, en: $.pinyin(n.text).toLowerCase() });
-                });
-
+    function CreateAutoLable(data) {
+        if (typeof data == 'string') {
+            data = JSON.parse(data);
+        }
+        var labArr = [];
+        $.each(data, function (i, n) {
+            $.each(n.children, function (i, n) {
+                labArr.push({ id: n.id, value: n.text, en: $.pinyin(n.text).toLowerCase() });
             });
 
-            return labArr;
+        });
+
+        return labArr;
+    }
+    var zTreeObj;
+    var o = $("#hid_MyMenuJson").val();
+    var zNodes = jQuery.parseJSON(o);
+
+    var setting = {
+        check: {
+            enable: true,
+            chkStyle: "checkbox",
+            chkboxType: { "Y": "s", "N": "ps" }
+        },
+
+    };
+
+    $(function ($) {
+        document.onkeydown = function (e) {
+            var keycode = document.all ? event.keyCode : e.which;
+            if (keycode == 13) {
+                sub();
+            }
         }
 
-        $(function ($) {
-            document.onkeydown = function (e) {
-                var keycode = document.all ? event.keyCode : e.which;
-                if (keycode == 13) {
-                    sub();
-                }
+
+
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetCityData", "Common")?ids=" + $("#s_CityId").val(),
+            success: function (data, status) {
+                citydata = data;
+                citySect1 = $.fn.selector.init($("#s_citySect"), setting, citydata, function (a) {
+                    $("#s_CityId").val(a);
+                });
+                $("#s_CityName").autocomplete({
+                    source: CreateAutoLable(data),
+                    select: function (event, item) {
+
+                        $("#s_CityId").val(item.item.id);
+
+                    }
+                });
+                $("#s_CityName").blur(function () { if ($(this).val() == "") $("#s_CityId").val(""); });
             }
+        });
+
+        CreateDialogDiv();
+
+        pager = Webdiyer.MvcPagers.getById("mypager1");
+
+        // pager.loadingElementId = "#progress";
+        pager.onBegin = 'beginprogress';
+        pager.onComplete = 'endprogress';
+        pager.allowReload = true;
+        $("#progress").hide(0);
+        LoadTime.Append('@Url.Content("~/Content/image/13221821.gif")');
 
 
 
-            $.ajax({
-                type: "GET",
-                url: "@Url.Action("GetCityData", "Common")?ids=" + $("#s_CityId").val(),
-                success: function (data, status) {
-                    citydata = data;
-                    citySect1 = $.fn.selector.init($("#s_citySect"), setting, citydata, function (a) {
-                        $("#s_CityId").val(a);
-                    });
-                    $("#s_CityName").autocomplete({
-                        source: CreateAutoLable(data),
-                        select: function (event, item) {
 
-                            $("#s_CityId").val(item.item.id);
+        // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
 
+
+
+
+
+
+
+
+
+
+    });
+
+    $("#tem-item-count").change(function () {
+        $("#PageSize").val($(this).val());
+        sub();
+    });
+
+    function sub() {
+
+        Webdiyer.__ajaxPages["PageIndex"] = 1;
+        $("#SysUser-search").submit();
+        try {
+            // pager.goToPage(2);
+            $("#dialog").dialog("close");
+        } catch (e)
+        { }
+    }
+    function pagesub() {
+        var pager = Webdiyer.MvcPagers.getById("mypager1");
+        try {
+            //  Webdiyer.__ajaxPages["PageIndex"] = 100000;
+            $("#dialog").dialog("close");
+        } catch (e) { }
+
+        pager.__ajax(pager.currentPageIndex, { type: pager.httpMethod, data: [] });
+        //  $("#Template-search").submit();
+
+
+    }
+    function UpdateDialog(id) {
+        $("#dialog").dialog({
+            title: "修改",
+            autoOpen: false,
+            modal: true,
+            width: 600,
+            height: 310
+
+        });
+        $("#dialog").html("Load......");
+        $("#dialog").load("@Url.Action("UpdateSysUser", "User")" + "?id=" + id);
+        $("#dialog").dialog("open");
+    }
+
+    function InsertDialog() {
+        $("#dialog").dialog({
+            title: "添加",
+            autoOpen: false,
+            modal: true,
+            width: 600,
+            height: 310
+
+        });
+        $("#dialog").html("Load......");
+        $("#dialog").load("@Url.Action("InsertSysUser", "User")");
+        $("#dialog").dialog("open");
+    }
+
+    function CloseDialog(data) {
+
+        $("#dialog").dialog("close");
+        LoadTime.html(data);
+    }
+
+    function UpdateDataDialog(id) {
+        $("#dialog").dialog({
+            title: "修改",
+            modal: true,
+            autoOpen: false,
+            width: 600,
+            height: 550
+
+        });
+        $("#dialog").html("Load......");
+        $("#dialog").load("@Url.Action("UpdateSysUserData", "SysUser")" + "?id=" + id);
+        $("#dialog").dialog("open");
+    }
+    function pdCheck(data,id) {
+        var b=false;
+        $.each(data, function (i, n) {
+            if (n.RoleId == id) {
+                b = true;
+                return true;
+            }
+        });
+        return b;
+    }
+
+    function OpenRoleTreeDialog(id) {
+
+
+
+
+
+        beginprogress();
+        zTreeObj = $.fn.zTree.init($("#treeMyMenu"), setting, zNodes);
+        zTreeObj.expandAll(true);
+
+
+        $.getJSON("@Url.Action("GetUserRoleRelations", "User")" + "?id=" + id, function (json) {
+
+
+                if (json && json.length > 0) {
+
+                    var nodes = zTreeObj.getNodes();
+                    $.each(nodes, function (i, n) {
+
+                        if (pdCheck(json, n.id)) {
+                            n.checked = true;
+                            zTreeObj.checkNode(n, true, true);
                         }
                     });
-                    $("#s_CityName").blur(function () { if ($(this).val() == "") $("#s_CityId").val(""); });
                 }
+
+                endprogress();
+
+                $("#MyMenuDialog").dialog({
+                    title: "角色设置",
+                    autoOpen: false,
+                    modal: true,
+                    width: 300,
+                    height: 600,
+                    modal: true,
+                    buttons: {
+                        "确定": function () {
+                            InsertUserRole(id);
+
+                            $(this).dialog("close");
+
+                        },
+                        "取消": function () {
+                            $(this).dialog("close");
+                        }
+                    }
+
+                });
+
+                $("#MyMenuDialog").dialog("open");
+
+
             });
 
-            CreateDialogDiv();
-
-            pager = Webdiyer.MvcPagers.getById("mypager1");
-
-            // pager.loadingElementId = "#progress";
-            pager.onBegin = 'beginprogress';
-            pager.onComplete = 'endprogress';
-            pager.allowReload = true;
-            $("#progress").hide(0);
-            LoadTime.Append('@Url.Content("~/Content/image/13221821.gif")');
-        });
-
-        $("#tem-item-count").change(function () {
-            $("#PageSize").val($(this).val());
-            sub();
-        });
-
-        function sub() {
-
-            Webdiyer.__ajaxPages["PageIndex"] = 1;
-            $("#SysUser-search").submit();
-            try {
-                // pager.goToPage(2);
-                $("#dialog").dialog("close");
-            } catch (e)
-            { }
         }
-        function pagesub() {
-            var pager = Webdiyer.MvcPagers.getById("mypager1");
-            try {
-                //  Webdiyer.__ajaxPages["PageIndex"] = 100000;
-                $("#dialog").dialog("close");
-            } catch (e) { }
-          
-            pager.__ajax(pager.currentPageIndex, { type: pager.httpMethod, data: [] });
-            //  $("#Template-search").submit();
 
-
-        }
-        function UpdateDialog(id) {
-            $("#dialog").dialog({
-                title: "修改",
-                autoOpen: false,
-                modal: true,
-                width: 600,
-                height: 310
-
+        function InsertUserRole(id) {
+            var nodes = zTreeObj.getCheckedNodes(true);
+            var rolestr = "";
+            $.each(nodes, function (i, n) {
+                rolestr += n.id + ",";
             });
-            $("#dialog").html("Load......");
-            $("#dialog").load("@Url.Action("UpdateSysUser", "User")" + "?id=" + id);
-            $("#dialog").dialog("open");
+            $.post("@Url.Action("AddUserRoleRelations", "User")", { id: id, roles: rolestr },
+                 function (data) {
+                     LoadTime.html(data);
+                 });
         }
 
-        function InsertDialog() {
-            $("#dialog").dialog({
-                title: "添加",
-                autoOpen: false,
-                modal: true,
-                width: 600,
-                height: 310
-
-            });
-            $("#dialog").html("Load......");
-            $("#dialog").load("@Url.Action("InsertSysUser", "User")");
-            $("#dialog").dialog("open");
-        }
-
-        function CloseDialog(data) {
-
-            $("#dialog").dialog("close");
-            LoadTime.html(data);
-        }
-
-        function UpdateDataDialog(id) {
-            $("#dialog").dialog({
-                title: "修改",
-                modal: true,
-                autoOpen: false,
-                width: 600,
-                height: 550
-
-            });
-            $("#dialog").html("Load......");
-            $("#dialog").load("@Url.Action("UpdateSysUserData", "SysUser")" + "?id=" + id);
-            $("#dialog").dialog("open");
-        }
-
-      
 
 
         var CreateDialogDiv = function () {
@@ -257,14 +392,33 @@
 
             LoadTime.show(msg, function () {
                 $.post("@Url.Action("LockSysUser", "User")", { id: id },
-                            function (data) {
+                    function (data) {
 
-                                LoadTime.html(data);
-                                pagesub();
-                            });
+                        LoadTime.html(data);
+                        pagesub();
+                    });
             });
 
+
+
         }
+
+        function DeleteSysUser(id) {
+            var msg = "您真的确定要操作吗？\n\n请确认！";
+
+
+
+            LoadTime.show(msg, function () {
+                $.post("@Url.Action("DeleteSysUser", "User")", { id: id },
+                    function (data) {
+
+                        LoadTime.html(data);
+                        pagesub();
+                    });
+            });
+        }
+
+
 
 
     </script>

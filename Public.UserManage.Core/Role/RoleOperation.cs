@@ -103,14 +103,36 @@ namespace UserPermission.Role
             return result;
         }
 
-        public int Delete(int id)
+        public string Delete(int id)
         {
-            int result = 0;
+            string result = "";
             string sqlCommandText = @"delete from [Role] where Id=@Id";
+
+            string sqlCommandText2 = @"delete from [UserRoleRelation] where RoleId=@RoleId";
+         
             using (IDbConnection conn = new SqlConnection(Config.GetConnectionString("UserPermission")))
             {
+                conn.Open();
+                IDbTransaction transaction = conn.BeginTransaction();
+                try
+                {
+                    conn.Execute(sqlCommandText, new { Id = id }, transaction);
 
-                result = conn.Execute(sqlCommandText, new { Id = id });
+                    conn.Execute(sqlCommandText2, new { RoleId = id }, transaction);
+
+                    transaction.Commit();
+
+                    result = "删除成功";
+
+                }
+                catch (Exception e)
+                {
+
+                    transaction.Rollback();
+                    result = e.Message;
+
+                }
+
 
             }
             return result;

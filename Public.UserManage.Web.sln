@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Public.UserManage.Test", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Public.UserManage.WebApi", "Public.UserManage.WebApi\Public.UserManage.WebApi.csproj", "{201AF4EA-9587-494B-B72A-84F0264531C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Public.Caching", "Public.Caching\Public.Caching.csproj", "{E42AE29E-B768-4A76-88F5-53CC9DA9009D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{201AF4EA-9587-494B-B72A-84F0264531C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{201AF4EA-9587-494B-B72A-84F0264531C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{201AF4EA-9587-494B-B72A-84F0264531C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E42AE29E-B768-4A76-88F5-53CC9DA9009D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E42AE29E-B768-4A76-88F5-53CC9DA9009D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E42AE29E-B768-4A76-88F5-53CC9DA9009D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E42AE29E-B768-4A76-88F5-53CC9DA9009D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

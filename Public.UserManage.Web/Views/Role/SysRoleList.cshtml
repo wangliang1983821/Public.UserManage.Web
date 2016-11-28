@@ -169,6 +169,21 @@
         }
       
 
+        function DeleteSysRole(id) {
+            var msg = "您真的确定要操作吗？\n\n请确认！";
+
+
+
+            LoadTime.show(msg, function () {
+                $.post("@Url.Action("DeleteSysRole", "Role")", { id: id },
+                    function (data) {
+
+                        LoadTime.html(data);
+                        pagesub();
+                    });
+            });
+        }
+
 
     </script>
 }
