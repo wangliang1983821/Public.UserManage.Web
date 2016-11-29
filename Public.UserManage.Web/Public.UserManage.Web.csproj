@@ -133,6 +133,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -490,6 +491,42 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\.gitignore" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\CHANGELOG.txt" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\css\jquery.treegrid.css" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\bootstrap-2.3.2\css\bootstrap-responsive.css" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\bootstrap-2.3.2\css\bootstrap-responsive.min.css" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\bootstrap-2.3.2\css\bootstrap.css" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\bootstrap-2.3.2\css\bootstrap.min.css" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\bootstrap-2.3.2\img\glyphicons-halflings-white.png" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\bootstrap-2.3.2\img\glyphicons-halflings.png" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\bootstrap-2.3.2\js\bootstrap.js" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\bootstrap-2.3.2\js\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\example-basic.html" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\example-bootstrap-2.html" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\example-bootstrap-3.html" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\example-bootstrap-resize.html" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\example-column.html" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\example-events.html" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\example-huge.html" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\examples\example-save-state.html" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\Gruntfile.js" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\img\collapse.png" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\img\expand.png" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\img\file.png" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\img\folder.png" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\index.html" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\js\jquery.cookie.js" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\js\jquery.treegrid.bootstrap2.js" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\js\jquery.treegrid.bootstrap3.js" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\js\jquery.treegrid.js" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\js\jquery.treegrid.min.js" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\styles.bak.css" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\styles.css" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\test.html" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\tests\qunit-1.12.0.css" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\tests\qunit-1.12.0.js" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\tests\tests.js" />
     <Content Include="Scripts\jquery.selector\v0.1\doc\index.html" />
     <Content Include="Scripts\jquery.selector\v0.1\doc\styles\4bf39ccd-0d33-488d-9dba-48da6df0b726.png" />
     <Content Include="Scripts\jquery.selector\v0.1\doc\styles\d9cb91fc-a532-468b-8d33-bbcf6992f77b.png" />
@@ -609,6 +646,13 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\bower.json" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\composer.json" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\LICENSE" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\package.json" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\params.json" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\README.md" />
+    <Content Include="Scripts\jquery-treegrid-0.3.0\treegrid.jquery.json" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -658,6 +702,10 @@
     <Content Include="Views\Role\SysRoleTable.cshtml" />
     <Content Include="Views\Role\InsertSysRole.cshtml" />
     <Content Include="Views\Role\UpdateSysRole.cshtml" />
+    <Content Include="Views\Category\ContentCategory.cshtml" />
+    <Content Include="Views\Category\ContentCategoryList.cshtml" />
+    <Content Include="Views\Category\UpdateContentCategory.cshtml" />
+    <Content Include="Views\Category\InsertContentCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -667,6 +715,18 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Public.Caching\Public.Caching.csproj">
+      <Project>{e42ae29e-b768-4a76-88f5-53cc9da9009d}</Project>
+      <Name>Public.Caching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Public.Model\Public.Model.csproj">
+      <Project>{51d9c6c9-4701-4a88-b5ae-66b0b9666bf3}</Project>
+      <Name>Public.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Public.SiteContent.Core\Public.SiteContent.Core.csproj">
+      <Project>{a43de350-f0d0-4d4a-9d9d-f242095b9790}</Project>
+      <Name>Public.SiteContent.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Public.UserManage.Core\Public.UserManage.Core.csproj">
       <Project>{a495ca24-d776-4478-b117-cfcbe704a372}</Project>
       <Name>Public.UserManage.Core</Name>

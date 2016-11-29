@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
 using System.Xml;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Nop.Core.Caching;
 using Public.UserManage.Web.Model;
 using Utility;
 using Formatting = Newtonsoft.Json.Formatting;
@@ -21,17 +22,25 @@ namespace Noah.CMS.Web.Controllers
     {
          
         private const String CITY_SOURCE_URL = "Public.City.Url";
-    
+
+        private const String CITY_SOURCE_Cache = "Public.City.Cache";
+
+        ICacheManager cm = new MemoryCacheManager();
+
         /// <summary>
         /// 获取城市信息,将数据转换为jQuery.selector.js的json数据
         /// </summary>
         /// <returns></returns>
         public string GetCityData()
         {
-           
-                var list = GetCityDataByUrl();
-                var  obj = JsonConvert.SerializeObject(list);
+            return cm.Get(CITY_SOURCE_Cache, () =>
+             {
+                 //specify timeout (5 secs)
+                 var list = GetCityDataByUrl();
+                 var obj = JsonConvert.SerializeObject(list);
                  return obj.ToString();
+             });
+               
         }
 
         private List<SelectorObj> GetCityDataByUrl()

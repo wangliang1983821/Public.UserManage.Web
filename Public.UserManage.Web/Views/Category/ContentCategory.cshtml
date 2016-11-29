@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "ContentCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css
+{
+  
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/jquery-treegrid-0.3.0/css/jquery.treegrid.css")" />
+}
+
+
+<div class="con_all archive_mgr">
+
+    
+    <div>
+        <div>
+            <input type="button" value="添加" onclick="InsertDialog(0)" class="button_org_b button_90_30">
+        </div>
+        <div class="resultbox">
+            <div class="result_title">
+                <h2>
+                    查询结果
+                </h2>
+             
+            </div>
+            <div id="ContentCategory-list">
+                @Html.Action("ContentCategoryList")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-treegrid-0.3.0/js/jquery.treegrid.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/DataArea/LoadTime.js")"></script>
+<script type="text/javascript">
+    
+    $(function ($) {
+       
+
+
+        CreateDialogDiv();
+
+      
+    });
+
+    function pagesub() {
+        LoadTime.Begin();
+        try {
+            //  Webdiyer.__ajaxPages["PageIndex"] = 100000;
+            $("#dialog").dialog("close");
+        } catch (e) { }
+      
+        $("#ContentCategory-list").load("@Url.Action("ContentCategoryList", "Category")");
+        //  $("#Template-search").submit();
+      
+        LoadTime.Complete();
+
+    }
+    function UpdateDialog(id) {
+        $("#dialog").dialog({
+            title: "修改",
+            autoOpen: false,
+            modal: true,
+            width: 600,
+            height: 310
+
+        });
+        $("#dialog").html("Load......");
+        $("#dialog").load("@Url.Action("UpdateContentCategory", "Category")" + "?id=" + id);
+        $("#dialog").dialog("open");
+    }
+
+    function InsertDialog(id) {
+        $("#dialog").dialog({
+            title: "添加",
+            autoOpen: false,
+            modal: true,
+            width: 600,
+            height: 310
+
+        });
+        $("#dialog").html("Load......");
+        $("#dialog").load("@Url.Action("InsertContentCategory", "Category")" + "?id=" + id);
+        $("#dialog").dialog("open");
+    }
+
+    function CloseDialog(data) {
+
+        $("#dialog").dialog("close");
+        LoadTime.html(data);
+    }
+
+       
+
+
+    var CreateDialogDiv = function () {
+        var d = '<div id="dialog" title="Dialog Title">' +
+           '</div>';
+
+        $("body").append(d).find("#dialog").hide();
+
+
+    }
+      
+
+    function DeleteSysRole(id) {
+        var msg = "您真的确定要操作吗？\n\n请确认！";
+
+
+
+        LoadTime.show(msg, function () {
+            $.post("@Url.Action("DeleteContentCategory", "Category")", { id: id },
+                function (data) {
+
+                    LoadTime.html(data);
+                    pagesub();
+                });
+        });
+    }
+
+</script>
+
+
+    }

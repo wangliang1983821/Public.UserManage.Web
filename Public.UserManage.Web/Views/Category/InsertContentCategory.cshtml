@@ -1,0 +1,77 @@
+﻿@{
+    Layout = null;
+}
+@using Public.Model.Category;
+@model ContentCategoryModel
+@* <div class="tc_con">*@
+<!--弹层内容区域star-->
+@using (Ajax.BeginForm("InsertContentCategorySub", null, new AjaxOptions()
+      {
+          HttpMethod = "POST",
+          InsertionMode = InsertionMode.Replace,
+          UpdateTargetId = "ContentCategory-list",
+          OnBegin = "LoadTime.Begin",
+          OnComplete = "LoadTime.Complete"
+      }, new { id = "ContentCategory-Insert" }))
+{
+   
+    @Html.HiddenFor(m => m.ParentId)
+    <div class="formlist">
+        <ul class="list">
+
+            <li>
+                <b><em>*</em>分类名：</b>
+                <div class="inp">
+                    <input type="text" name="Name" id="Name" class="inputborder w280" value="@Model.Name" />
+
+                </div>
+            </li>
+
+            <li>
+                <b><em>*</em>英文名：</b>
+                <div class="inp">
+                    <input type="text" name="EnglishName" id="EnglishName" class="inputborder w280" value="@Model.EnglishName" />
+
+                </div>
+            </li>
+
+        </ul>
+
+        <div class="submit"><input type="submit" class="button_org_b button_90_30" value="确定" /><input type="button" id="btn_Close" class="button_gray_b button_90_30" value="取消" /></div>
+    </div>
+    @*   @{Html.EndForm();}*@
+}
+<script type="text/javascript">
+
+         $(function ($) {
+
+
+
+             $("#btn_Close").click(function () {
+                 $("#dialog").dialog("close");
+             });
+             $("#ContentCategory-Insert").validate({
+                 errorPlacement: function (error, element) {
+                     var p = $("<div class='valid-error'  />").append(error);
+                     p.appendTo(element.parent());
+                 },
+                 rules: {
+                     Name: {
+                         required: true,
+                         stringCheck:true,
+                         maxcnlength:20
+                     }
+                 },
+                 messages: {
+                     Name: {
+                         required: "没有填写名称"
+                     }
+                 }
+             });
+
+         });
+
+
+</script>
+<!--弹层内容区域end-->
+@*</div>*@

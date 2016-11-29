@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+@using Public.Model.Category;
+@model  List<ContentCategoryModel>
+<table class="tree table_result" style="width:100%;">
+    <thead>
+        <tr>
+            @*<th>ID</th>*@
+            <th>名称</th>
+            <th>英文名</th>
+        
+            <th>操作</th>
+        </tr>
+    </thead>
+    @{
+        foreach (var item in Model)
+        {
+            string text = item.ParentId == 0 ? "" : "treegrid-parent-" + item.ParentId;
+            <tr class="treegrid-@item.Id @text" >
+
+                @*<td>@item.Id</td>*@
+                <td>@item.Name</td>
+                <td>@item.EnglishName</td>
+
+
+
+                <td>
+                    <div class="caozuo">
+                        <a href='javascript:void(0);' class='ae-add' onclick="InsertDialog('@item.Id')">添加子分类</a>
+                        <a href='javascript:void(0);' class='ae-edit' onclick="UpdateDialog('@item.Id')">编辑</a>
+
+                        <a href='javascript:void(0);' class='ae-del' data-id='@item.Id' onclick="DeleteSysRole('@item.Id')">删除</a>
+
+                    </div>
+                </td>
+            </tr>
+        }
+
+    }
+</table>
+<script type="text/javascript">
+
+    $(function ($) {
+        $('.tree').treegrid();
+    });
+</script>
