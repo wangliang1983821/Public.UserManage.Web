@@ -1,0 +1,125 @@
+﻿@{
+    Layout = null;
+}
+@model List<DotNet.Utilities.FileShowModel>
+
+@{
+
+    var treeJson = "";
+
+    treeJson = Newtonsoft.Json.JsonConvert.SerializeObject(Model);
+
+}
+
+
+<input type="hidden" id="hid_MyMenuJson" value="@treeJson" />
+
+   <div class="main main_all" style="overflow:auto;position:relative;">
+       <div class="formlist formlist_search">
+           <div style="float:left; width:600px; overflow:auto;position:relative;">
+               <ul id="treeMyMenu" class="ztree"></ul>
+           </div>
+               <div id="file_files" style="float:left; width:300px; overflow:auto;position:relative;"></div>
+         
+       </div>
+     
+       </div>
+<div>
+    <input type="button" value="查看目录结构" onclick="FileShowDialog('@ViewBag.Path.Replace(@"\", @"\\")')" class="button_org_b button_90_30" />
+    <input type="button" value="上传文件" onclick="ShowDialogUpLoad('@ViewBag.Path.Replace(@"\", @"\\")')" class="button_org_b button_90_30" />
+</div>
+
+<div id="File_openDialog">
+
+
+</div>
+
+<div id="fileshowdialog">
+
+
+</div>
+
+<script type="text/javascript">
+    var upFilePath = "";
+
+
+
+    var zTreeObj;
+    var o = $("#hid_MyMenuJson").val();
+    var zNodes = jQuery.parseJSON(o);
+
+    var setting = {
+        callback: {
+            onClick: zTreeOnClick
+        }
+    };
+    zTreeObj = $.fn.zTree.init($("#treeMyMenu"), setting, zNodes);
+    zTreeObj.expandAll(true);
+
+    function FileShowDialog(path) {
+
+        path = encodeURIComponent(path);
+
+        $("#fileshowdialog").dialog({
+            title: "文件结构",
+            autoOpen: false,
+            modal: true,
+            width: 500,
+            height: 310
+
+        });
+        $("#fileshowdialog").html("Load......");
+        $("#fileshowdialog").load("@Url.Action("FileDefaults", "FileManage")" + "?path=" + path);
+        $("#fileshowdialog").dialog("open");
+    }
+
+    function GetFiles() {
+        if (upFilePath) {
+            path = upFilePath;
+        }
+        path = encodeURIComponent(path);
+        $("#file_files").html("Load......");
+        $("#file_files").load("@Url.Action("GetFiles", "FileManage")" + "?path=" + path);
+       
+    }
+
+    function zTreeOnClick(event, treeId, treeNode) {
+      
+        upFilePath = treeNode.id;
+        GetFiles();
+    };
+
+    ShowDialogUpLoad = function (path) {
+
+        if (upFilePath) {
+            path = upFilePath;
+        }
+
+        path = encodeURIComponent(path);
+        $("#File_openDialog").dialog({
+            title: "文件结构",
+            autoOpen: false,
+            modal: true,
+            width: 800,
+            height: 810
+
+        });
+
+
+        var iframeurl = "/Content/upload/WebUploader.html" + "?path=" + path;
+        var area = '<iframe frameborder="0" name="DataArea_iframe1" id="DataArea_iframe1" src="' + iframeurl + '" width="100%" height="100%"></iframe>';
+
+        $("#File_openDialog").html(area);
+        $("#File_openDialog").dialog("open");
+    }
+
+  
+
+</script>
+
+
+
+
+
+
+

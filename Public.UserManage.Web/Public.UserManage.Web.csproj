@@ -135,9 +135,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\FileManageController.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UpLoadController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WebSiteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -491,6 +494,25 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\upload\WebUploader.html" />
+    <Content Include="Content\upload\WebUploader_files\27ba18cc-e569-11e3-8fed-8dc74d10d514.png" />
+    <Content Include="Content\upload\WebUploader_files\27bbe1b6-e569-11e3-8316-1a448cb3224a.png" />
+    <Content Include="Content\upload\WebUploader_files\47202b54-d9f5-11e3-8e5b-810c11b8853d.png" />
+    <Content Include="Content\upload\WebUploader_files\58b30676-e570-11e3-88f9-96ea610a5771.jpg" />
+    <Content Include="Content\upload\WebUploader_files\bootstrap-theme.min.css" />
+    <Content Include="Content\upload\WebUploader_files\bootstrap.min.css" />
+    <Content Include="Content\upload\WebUploader_files\bootstrap.min.js" />
+    <Content Include="Content\upload\WebUploader_files\demo.css" />
+    <Content Include="Content\upload\WebUploader_files\demo.js" />
+    <Content Include="Content\upload\WebUploader_files\font-awesome.min.css" />
+    <Content Include="Content\upload\WebUploader_files\global.js" />
+    <Content Include="Content\upload\WebUploader_files\h.js" />
+    <Content Include="Content\upload\WebUploader_files\jquery-1.10.2.min.js" />
+    <Content Include="Content\upload\WebUploader_files\qrcode.jpg" />
+    <Content Include="Content\upload\WebUploader_files\style.css" />
+    <Content Include="Content\upload\WebUploader_files\syntax.css" />
+    <Content Include="Content\upload\WebUploader_files\webuploader.css" />
+    <Content Include="Content\upload\WebUploader_files\webuploader.js" />
     <Content Include="Scripts\jquery-treegrid-0.3.0\.gitignore" />
     <Content Include="Scripts\jquery-treegrid-0.3.0\CHANGELOG.txt" />
     <Content Include="Scripts\jquery-treegrid-0.3.0\css\jquery.treegrid.css" />
@@ -706,6 +728,11 @@
     <Content Include="Views\Category\ContentCategoryList.cshtml" />
     <Content Include="Views\Category\UpdateContentCategory.cshtml" />
     <Content Include="Views\Category\InsertContentCategory.cshtml" />
+    <Content Include="Views\WebSite\WebSiteList.cshtml" />
+    <Content Include="Views\WebSite\WebSiteTable.cshtml" />
+    <Content Include="Views\WebSite\InsertWebSite.cshtml" />
+    <Content Include="Views\WebSite\UpdateWebSite.cshtml" />
+    <Content Include="Views\FileManage\FileManage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

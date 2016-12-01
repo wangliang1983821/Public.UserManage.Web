@@ -1,0 +1,212 @@
+﻿@{
+    ViewBag.Title = "WebSiteList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Public.UserManage.Web.Model.SearchCodition
+<div class="con_all">
+    <!--右侧内容-->
+    <div class="main main_all">
+        <div class="formlist formlist_search">
+            @using (Ajax.BeginForm("WebSiteList", null, new AjaxOptions()
+      {
+          HttpMethod = "POST",
+          InsertionMode = InsertionMode.Replace,
+          UpdateTargetId = "WebSite-list",
+          OnBegin = "beginprogress",
+          OnComplete = "endprogress"
+      }, new { id = "WebSite-search" }))
+            {
+                <ul class="list">
+                    <li>
+                        <b>站点名：</b>
+                        <div class="inp">
+                            <input type="text" id="SearchName" name="SearchName" value="@Model.SearchName" class="sct-input" />
+
+                        </div>
+                    </li>
+
+
+                </ul>
+                @Html.HiddenFor(m => m.PageSize)
+                <div class="submit">
+                    <input type="button" onclick="sub()" value="查询" class="button_org_b button_90_30" />
+
+                </div>
+            }
+        </div>
+
+        <div>
+            <input type="button" value="添加" onclick="InsertDialog()" class="button_org_b button_90_30">
+        </div>
+
+        <div class="resultbox">
+            <div class="result_title">
+                <h2>查询结果</h2>
+                <div class="gongyou"><span>共有<strong id="tem-c"></strong>条符合您的查询条件</span></div>
+                <div class="gongyou" id="progress"><img src="@Url.Content("~/Content/image/13221821.gif")" /></div>
+                <div class="xianshi">
+                    <span>每页显示</span><select id="tem-item-count" class="inputborder w70">
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select><span>条</span>
+                </div>
+            </div>
+            <div id="SysRole-list">
+                @{ Html.RenderPartial("WebSiteTable", ViewBag.list as Webdiyer.WebControls.Mvc.PagedList<Public.Model.WebSite.WebSiteModel>); }
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+<link rel="stylesheet" href="@Url.Content("~/Content/ztree/css/zTreeStyle/zTreeStyle.css")" type="text/css">
+<script type="text/javascript" src="@Url.Content("~/Content/ztree/jquery.ztree.core-3.5.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/DataArea/LoadTime.js")"></script>
+<link href="@Url.Content("~/Scripts/webuploader/webuploader.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="@Url.Content("~/Scripts/webuploader/webuploader.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/nc.news.uploadimage.js")"></script>
+    <script type="text/javascript">
+
+
+        var pager = null;
+       
+
+        $(function ($) {
+            document.onkeydown = function (e) {
+                var keycode = document.all ? event.keyCode : e.which;
+                if (keycode == 13) {
+                    sub();
+                }
+            }
+
+
+
+            CreateDialogDiv();
+
+            pager = Webdiyer.MvcPagers.getById("mypager1");
+
+            // pager.loadingElementId = "#progress";
+            pager.onBegin = 'beginprogress';
+            pager.onComplete = 'endprogress';
+            pager.allowReload = true;
+            $("#progress").hide(0);
+            LoadTime.Append('@Url.Content("~/Content/image/13221821.gif")');
+        });
+
+        $("#tem-item-count").change(function () {
+            $("#PageSize").val($(this).val());
+            sub();
+        });
+
+        function sub() {
+
+            Webdiyer.__ajaxPages["PageIndex"] = 1;
+            $("#WebSite-search").submit();
+            try {
+                // pager.goToPage(2);
+                $("#dialog").dialog("close");
+            } catch (e)
+            { }
+        }
+        function pagesub() {
+            var pager = Webdiyer.MvcPagers.getById("mypager1");
+            try {
+                //  Webdiyer.__ajaxPages["PageIndex"] = 100000;
+                $("#dialog").dialog("close");
+            } catch (e) { }
+
+            pager.__ajax(pager.currentPageIndex, { type: pager.httpMethod, data: [] });
+            //  $("#Template-search").submit();
+
+
+        }
+        function UpdateDialog(id) {
+            $("#dialog").dialog({
+                title: "修改",
+                autoOpen: false,
+                modal: true,
+                width: 600,
+                height: 310
+
+            });
+            $("#dialog").html("Load......");
+            $("#dialog").load("@Url.Action("UpdateWebSite", "WebSite")" + "?id=" + id);
+            $("#dialog").dialog("open");
+        }
+
+        function InsertDialog() {
+            $("#dialog").dialog({
+                title: "添加",
+                autoOpen: false,
+                modal: true,
+                width: 600,
+                height: 310
+
+            });
+            $("#dialog").html("Load......");
+            $("#dialog").load("@Url.Action("InsertWebSite", "WebSite")");
+            $("#dialog").dialog("open");
+        }
+       
+        function FileDialog(path) {
+          
+           
+        
+          
+            path = encodeURIComponent(path);
+            
+            $("#dialog").dialog({
+                title: "文件管理",
+                autoOpen: false,
+                modal: true,
+                width: 1000,
+                height: 510
+
+            });
+            $("#dialog").html("Load......");
+            $("#dialog").load("@Url.Action("FileManage", "FileManage")" + "?path=" + path);
+            $("#dialog").dialog("open");
+        }
+
+
+        function CloseDialog(data) {
+
+            $("#dialog").dialog("close");
+            LoadTime.html(data);
+        }
+
+
+
+
+        var CreateDialogDiv = function () {
+            var d = '<div id="dialog" style="overflow:auto;" title="Dialog Title">' +
+               '</div>';
+
+            $("body").append(d).find("#dialog").hide();
+
+
+        }
+
+
+        function DeleteSysRole(id) {
+            var msg = "您真的确定要操作吗？\n\n请确认！";
+
+
+
+            LoadTime.show(msg, function () {
+                $.post("@Url.Action("DeleteWebSite", "WebSite")", { id: id },
+                    function (data) {
+
+                        LoadTime.html(data);
+                        pagesub();
+                    });
+            });
+        }
+
+       
+
+    </script>
+}

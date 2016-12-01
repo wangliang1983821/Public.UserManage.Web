@@ -15,7 +15,7 @@ namespace Utility
 
         #region GetSettings
         public static string GetAppSetting(string key)
-        {       
+        {    
             return System.Configuration.ConfigurationManager.AppSettings[key];
         }
 

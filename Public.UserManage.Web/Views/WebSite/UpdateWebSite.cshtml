@@ -1,34 +1,53 @@
 ﻿@{
     Layout = null;
 }
-
-@model UserPermission.Role.Role
+@model Public.Model.WebSite.WebSiteModel
 @* <div class="tc_con">*@
 <!--弹层内容区域star-->
-@using (Ajax.BeginForm("InsertSysRoleSub", null, new AjaxOptions()
+@using (Ajax.BeginForm("UpdateWebSiteSub", null, new AjaxOptions()
       {
           HttpMethod = "POST",
           InsertionMode = InsertionMode.Replace,
-          UpdateTargetId = "SysRole-list",
+          UpdateTargetId = "WebSite-list",
           OnBegin = "LoadTime.Begin",
           OnComplete = "LoadTime.Complete"
-      }, new { id = "SysRole-Insert" }))
+      }, new { id = "WebSite-Update" }))
 {
     @Html.HiddenFor(m => m.Id)
-    @Html.HiddenFor(m => m.IsDelete)
+ 
     <div class="formlist">
         <ul class="list">
-         
 
             <li>
-                <b><em>*</em>角色名：</b>
+                <b><em>*</em>站点名：</b>
                 <div class="inp">
                     <input type="text" name="Name" id="Name" class="inputborder w280" value="@Model.Name" />
 
                 </div>
             </li>
 
-         
+            <li>
+                <b><em>*</em>英文名：</b>
+                <div class="inp">
+                    <input type="text" name="EnglishName" id="EnglishName" class="inputborder w280" value="@Model.EnglishName" />
+
+                </div>
+            </li>
+            <li>
+                <b><em>*</em>url地址：</b>
+                <div class="inp">
+                    <input type="text" name="Url" id="Url" class="inputborder w280" value="@Model.Url" />
+
+                </div>
+            </li>
+
+            <li>
+                <b><em>*</em>物理地址：</b>
+                <div class="inp">
+                    <input type="text" name="Path" id="Path" class="inputborder w280" value="@Model.Path" />
+
+                </div>
+            </li>
 
         </ul>
 
@@ -37,15 +56,15 @@
     @*   @{Html.EndForm();}*@
 }
 <script type="text/javascript">
-        
+
          $(function ($) {
-           
+
 
 
              $("#btn_Close").click(function () {
                  $("#dialog").dialog("close");
              });
-             $("#SysRole-Insert").validate({
+             $("#WebSite-Update").validate({
                  errorPlacement: function (error, element) {
                      var p = $("<div class='valid-error'  />").append(error);
                      p.appendTo(element.parent());
@@ -70,5 +89,3 @@
 </script>
 <!--弹层内容区域end-->
 @*</div>*@
-
-

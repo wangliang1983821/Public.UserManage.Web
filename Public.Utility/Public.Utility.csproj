@@ -43,6 +43,16 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="DataAreaCommon.cs" />
+    <Compile Include="FileHelper\DirFile.cs" />
+    <Compile Include="FileHelper\FileShowModel.cs" />
+    <Compile Include="FileHelper\FileOperate.cs" />
+    <Compile Include="FileHelper\INIFile.cs" />
+    <Compile Include="FileUpDown\DownLoadHelper.cs" />
+    <Compile Include="FileUpDown\FileDown.cs" />
+    <Compile Include="FileUpDown\FileUp.cs" />
+    <Compile Include="FileUpDown\UpLoadFiles.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlUtil.cs" />
   </ItemGroup>
